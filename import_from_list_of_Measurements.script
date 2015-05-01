@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# This is a bsub job submission script for running the OMERO importer command
+# against a file containing a list of paths to Columbus xml file targets.
+# The script reads the path and extracts information to be used
+# in the -n, plate name, option. This distributes the import jobs 
+# across cores in the special omero queue on Orchestra. 
+#
+# Usage: scriptcommand XML_List_File OMERO_ScreenID
+#
+# Read the file containing the paths
+
+set -x
+
+PLATELIST=$1
+SCREENID=$2
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+for IMPORTTARGET in `cat "$PLATELIST"`
+
+do
+
+# The following uses xmllint to extract the PlateName out of the xml file. This is
+# passed to the -n option for nameing the plate.
+
+PLATENAME=$(/opt/xmlsoft/libxml2-2.7.8/xmllint --xpath '//*[name()="PlateName"]/text()' "$IMPORTTARGET")
+
+# run importer:
+
+~omero/OMERO-CURRENT/bin/omero import -s localhost -u LINCS -w icbp45 -r "$SCREENID" -n "$PLATENAME" -- --transfer=ln_s "$IMPORTTARGET"
+
+done
+
+
+IFS=$SAVEIFS
