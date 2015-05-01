@@ -10,24 +10,29 @@
 #
 # Read the file containing the paths
 
+# turn on debugging
 set -x
 
 PLATELIST=$1
 SCREENID=$2
 
+# for handling characters that will confuse bash
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 
+# loop through the list of xml files
 for IMPORTTARGET in `cat "$PLATELIST"`
 
 do
 
 # The following uses xmllint to extract the PlateName out of the xml file. This is
-# passed to the -n option for nameing the plate.
+# passed to the -n option for nameing the plate. This is a special build path for
+# lincs-omero because it did not have the correct version of lint.
 
 PLATENAME=$(/opt/xmlsoft/libxml2-2.7.8/xmllint --xpath '//*[name()="PlateName"]/text()' "$IMPORTTARGET")
 
 # run importer:
+# I need to remove the hard coded login.
 
 ~omero/OMERO-CURRENT/bin/omero import -s localhost -u LINCS -w icbp45 -r "$SCREENID" -n "$PLATENAME" -- --transfer=ln_s "$IMPORTTARGET"
 
