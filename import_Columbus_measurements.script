@@ -6,6 +6,7 @@ IFS=$(echo -en "\n\b")
 SCREENPATH=$1
 SCREENID=$2
 OMEUSER=$3
+SUDOUSER=$4
 
 for IMPORTTARGET in `find ${SCREENPATH} -name "MeasurementIndex*xml"`
 do
@@ -17,7 +18,7 @@ PLATENAME=$(/opt/xmlsoft/libxml2-2.7.8/xmllint --xpath '//*[name()="PlateName"]/
 
 # run importer:
 
-~omero/OMERO-CURRENT/bin/omero import -s localhost -u "$OMEUSER" --sudo jc168 -r "$SCREENID" -n "$PLATENAME" -- --transfer=ln_s "$IMPORTTARGET"
+~omero/OMERO-CURRENT/bin/omero import -s localhost -u "$OMEUSER" --sudo $SUDOUSER -r "$SCREENID" -n "$PLATENAME" -- --transfer=ln_s "$IMPORTTARGET"
 
 
 done
