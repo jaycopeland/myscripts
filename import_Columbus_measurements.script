@@ -1,0 +1,27 @@
+#!/bin/bash
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+SCREENPATH=$1
+SCREENID=$2
+OMEUSER=$3
+
+for IMPORTTARGET in `find ${SCREENPATH} -name "MeasurementIndex*xml"`
+do
+
+# The following uses xmllint to extract the PlateName out of the xml file. This is
+# passed to the -n option for nameing the plate.
+
+PLATENAME=$(/opt/xmlsoft/libxml2-2.7.8/xmllint --xpath '//*[name()="PlateName"]/text()' "$IMPORTTARGET")
+
+# run importer:
+
+~omero/OMERO-CURRENT/bin/omero import -s localhost -u "$OMEUSER" --sudo jc168 -r "$SCREENID" -n "$PLATENAME" -- --transfer=ln_s "$IMPORTTARGET"
+
+
+done
+
+
+IFS=$SAVEIFS
+
