@@ -16,8 +16,8 @@ FOR TRAINING PURPOSES ONLY!
 # These values will be imported by all the other training scripts.
 HOST = 'localhost'
 PORT = 4064
-USERNAME = 'LINCS'
-PASSWORD = 'icbp45'
+USERNAME = ''
+PASSWORD = ''
 
 from omero.gateway import BlitzGateway
 
