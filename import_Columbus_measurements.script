@@ -4,7 +4,8 @@
 # script starts by searching for MeasurementIndex*xml files under the 
 # screen path entered as the first argument in the command. Those
 # xml files are then fed into the omero import script as import targets. 
-# The script runs with the sudo option. 
+# The script runs with the sudo option.
+# Jay Copeland 
 
 
 SAVEIFS=$IFS
