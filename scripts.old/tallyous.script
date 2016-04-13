@@ -1,0 +1,13 @@
+#!/bin/bash
+
+~/scripts/countjobsbyou.script > /tmp/date_ou_user_jobs.txt
+
+awk -F, '{ print $2 }' /tmp/date_ou_user_jobs.txt | 
+while read ou 
+   do 
+      awk -F, -v ou="$ou" '/'"$ou"'/ { total+=$4 } END { print $1","ou","total }' /tmp/date_ou_user_jobs.txt 
+   done | 
+sort | 
+uniq
+
+

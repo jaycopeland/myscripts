@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ls ./ | while read dir
+do
+    du -sk ./$dir
+done

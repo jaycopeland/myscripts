@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+for f in `cat "$1"`
+do
+
+  xmllint --xpath '//*[name()="ScreenName"]/text()' "$f"
+
+done
+
+IFS=$SAVEIFS

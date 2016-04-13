@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+find /files/Opera/OperaDB -type d -name "*Meas_*" |
+sed -e 's/\/files\/Opera\/OperaDB\///;
+        s/\/Meas_.*//;
+        s/\/.*\//,/;
+        s/\//,/' |
+sort |
+uniq |
+awk -F, '{ print $2 "," $1 }' |
+sort > ~/tmp/platecommaowner

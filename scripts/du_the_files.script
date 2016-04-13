@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+du -sk /files/ImStor/perrimon/Opera/plates/* |
+sed -e 's/\/files\/ImStor\/perrimon\/Opera\/plates\//,/' |
+awk -F, '{ print $2 "," $1 }' |
+sort |
+uniq > ~/tmp/platecommaduminussk

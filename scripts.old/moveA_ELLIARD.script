@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+for dir in `cat /scratch/A_ELLIARDplates`
+do rsync -av --no-g $dir /files/Opera/chrisbakal/A_ELLEARD/ 
+done

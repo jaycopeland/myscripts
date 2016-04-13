@@ -1,0 +1,3 @@
+#!/bin/bash
+
+for user in `bjobs -u all | awk '{ print $2 }' | sort | uniq`;  do adquery user --canonical $user; done

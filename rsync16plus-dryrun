@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# The purpose of this is to make it possible to rsync files
+# from one collaboration deep in my groups list to another
+# another collaboration also owned by a group beyond the 16
+# group limit.
+#
+# To use this it is necessary for the host to be able to access 
+# both the source and destination directories with the correct 
+# group assignment. The omero and transfer hosts can do this. 
+#
+# By Jay Copeland
+
+HOST=$(hostname)
+SOURCEPATH=$1
+DESTPATH=$2
+
+# IMPORTANT: You must first newgrp to the group that owns the destination directory:
+
+# newgrp ImStor_OME-Orchestra
+
+# run rsync:
+
+# use the dry run option (-n) in this version of the script for testing.
+
+rsync -n -av --no-perms --no-owner --no-group --rsync-path="~/rsync_ImStor_sorger" $HOST:"$SOURCEPATH" "$DESTPATH/"

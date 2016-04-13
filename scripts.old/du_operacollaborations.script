@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# du_operacollaborations.script
+
+bsub du -sh /files/Opera/*
+bsub sg GENETICS_OPERA_HCS_DRSC "du -sh /files1/Genetics/OPERA_HCS_DRSC/*"
+

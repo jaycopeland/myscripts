@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+awk -F, '{ print $3 }' ~/tmp/join_plate_dusk_owner | 
+	sort | 
+	uniq | 
+	while 
+		read dir  
+			do 
+				awk -F, -v dir="$dir" '/'"$dir"'/ { total+=$2 } END { print dir","total }' ~/tmp/join_plate_dusk_owner 
+			done
+ 
+

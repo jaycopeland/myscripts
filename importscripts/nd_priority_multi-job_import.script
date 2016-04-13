@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# This is a bsub job submission script for running the OMERO importer command
+# against a list of nd file targets. 
+
+#
+# Usage: import.script nd_List_File DATASETID 
+#
+
+set -x
+
+PLATELIST=$1
+DATASETID=$2
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+for IMPORTTARGET in `cat "$PLATELIST"`
+
+do
+
+# submit jobs to Orchestra to run the importer:
+
+bsub -W 12:00 -q priority -R "select[omero]" ~/OMERO.clients.linux-current/importer-cli -s lincs-omero.hms.harvard.edu -u LINCS -w icbp45 -d "$DATASETID" -- --transfer=ln_s "$IMPORTTARGET"
+
+done
+
+
+IFS=$SAVEIFS

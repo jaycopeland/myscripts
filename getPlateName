@@ -1,0 +1,5 @@
+#!/bin/bash
+
+xmllint --xpath "/*/*[4]/*/*[2]/*[1]/text()" "$1" 
+
+

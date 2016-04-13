@@ -1,0 +1,5 @@
+#!/bin/bash
+
+newgrp ImStor_sorger
+
+find /files/ImStor/sorger/data/Operetta/Sharon/transfer_to_OME-Orchestra/ -mindepth 1 -maxdepth 1 -type d -exec ./rsync16plus {} /files/ImStor/OME-Orchestra/sorger/hw168/ \;

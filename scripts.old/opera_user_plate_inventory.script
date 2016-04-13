@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd /files/Opera
+
+ls /files/Opera/OperaDB | while read dir
+
+do
+   echo $dir
+   find "$dir" -iregex '.*Meas_[0-9]*' | sed -e 's/\/Meas_.*$//; s/.*\///' | sort | uniq   
+done
+
+

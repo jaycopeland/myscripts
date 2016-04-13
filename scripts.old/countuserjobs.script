@@ -1,0 +1,13 @@
+#!/bin/bash
+
+bjobs -u all | awk '{ print $2 }' | sort | uniq > /tmp/currentusers.txt
+
+for user in `cat /tmp/currentusers.txt`
+do
+   adquery user -C $user 2>/dev/null | sed -e 's/med.harvard.edu\/PEOPLE\/// ; s/^:.*$// ; s/AFFILIATE\//AFFILIATE-' |
+   tr -d '\n' ; bjobs -r -u $user | 
+   wc -l | 
+   awk '{ print ": " $0 }' 
+done
+
+

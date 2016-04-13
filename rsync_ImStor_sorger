@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sg ImStor_sorger "/usr/bin/rsync $*"
+

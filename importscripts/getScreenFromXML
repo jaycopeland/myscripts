@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+xmllint --xpath '//*[name()="ScreenName"]/text()' "$1"

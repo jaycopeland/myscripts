@@ -1,0 +1,1 @@
+jc168@flute000-176:~$ for plate in "`cat mn79platelist.txt `"; do echo "$plate" | sed s%/n/data3/cores/ImStor/OME-Orchestra/sorger/mn79/mario-testing/%% | sed s%/MeasurementIndex.ColumbusIDX.xml%% ; done

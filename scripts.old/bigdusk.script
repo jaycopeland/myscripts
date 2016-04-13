@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cat ~/tmp/platefolders | while read plates
+
+do 
+   du -sk "/files/Opera/plates/$plates" 
+done 

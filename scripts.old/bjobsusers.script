@@ -1,0 +1,13 @@
+#!/bin/bash
+
+bjobs -u all | awk '/[^0-9]/' >  ~/tmp/bjobsminusuall
+
+awk '{ print $2 }' ~/tmp/bjobsminusuall | 
+	sort | 
+	uniq | 
+	while 
+		read user  
+			do 
+				awk  -v user="$user" '/'"$user"'/ { count++ } END { print user"\t"count }' ~/tmp/bjobsminusuall 
+			done
+

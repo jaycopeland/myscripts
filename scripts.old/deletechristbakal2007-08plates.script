@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+cd /files/Opera
+
+for dir in `cat ~/chrisbakaldeleteinplates.txt`
+  do rm -rf $dir
+done
+
+

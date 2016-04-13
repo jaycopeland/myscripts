@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# This script reads all the directoris in Sorger Microscopy Captures
+# on files.med.harvard.edu and then submits to LSF a separate rsync
+# job for each directory to copy the folder contents to the sorgerlab
+# collaboration on files1. This will be run periodically until we are
+# ready to switch people over to using files1.
+
+ls /files/SysBio/Sorger\ Microscopy\ Captures | while read dir
+
+do
+
+   bsub sg SYSTEMBIO_sorgerlab "rsync -a --no-g /files/SysBio/Sorger\ Microscopy\ Captures/$dir /files1/SysBio/sorgerlab/data/dv/" 
+
+done

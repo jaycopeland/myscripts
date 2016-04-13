@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# du_files1_collaborations.script
+
+bsub sg SYSTEMBIO_sorgerlab "du -sk /files1/SysBio/sorgerlab"
+bsub sg CELLBIO_bruggelab "du -sk /files1/Cell\ Biology/bruggelab"
+bsub sg GENETICS_OPERA_HCS_DRSC "du -sk /files1/Genetics/OPERA_HCS_DRSC"
+
