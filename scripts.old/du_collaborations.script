@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# du_collaborations.script
-
-bsub du -sh /files/SysBio/sorger_arrayworx
-bsub du -sh "/files/SysBio/Sorger Microscopy Captures"
-bsub sg SYSTEMBIO_sorgerlab "du -sh /files1/SysBio/sorgerlab"
-bsub sg CELLBIO_bruggelab "du -sh /files1/Cell\ Biology/bruggelab"
-
