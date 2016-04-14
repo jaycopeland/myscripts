@@ -1,9 +1,0 @@
-#!/bin/bash
-
-
-
-
-
-   find /files/SysBio/sorger_arrayworx | wc 
-   find /files1/SysBio/sorgerlab/data/aw | wc
-
