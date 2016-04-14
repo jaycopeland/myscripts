@@ -1,8 +1,2 @@
 # myscripts
-This is my collection of import scripts for importing data into lincs-omero. 
-Most of these are written for specific situations and are not generally 
-re-usable. As such, they are a starting point and will need work to make
-them generally usable. That will have to wait until we have the permissions 
-worked out as to who can run these.
-
-hello world
+This is my collection of scripts I have created over the years for various purposes, mostly related to managing OMERO, Opera data, imports, checking disk usage on various systems, etc. Right now it is disorganized. The first step was to put everything here in GitHub. The next step is to clean up this mess and divide up the actually useful scripts into logical groups and make some documentation. 

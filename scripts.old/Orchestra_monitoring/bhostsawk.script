@@ -1,4 +1,6 @@
 #!/bin/bash
+# This script prints out the total number of cpus on Orchestra and the number that are
+# currently available. 
 
 bhosts | awk ' { totalcpus+=$4 } END { print "total cpus: "totalcpus }'
 bhosts | awk '/ok/ { totalavailablecpus+=$5 } END { print "available cpus: "totalavailablecpus }'
