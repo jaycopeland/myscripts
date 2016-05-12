@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# This is a script for importing a screen exported from Columbus. The
+# script starts by searching for MeasurementIndex*xml files under the 
+# screen path entered as the first argument in the command. Those
+# xml files are then fed into the omero import script as import targets. 
+# The script runs with the Import sudo option.
+# Jay Copeland 
+
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+SCREENPATH=$1
+SCREENID=$2
+OMEUSER=$3
+SUDOUSER=$4
+
+for IMPORTTARGET in `find ${SCREENPATH} -name "MeasurementIndex*xml"`
+do
+
+# The following uses xmllint to extract the PlateName out of the xml file. This is
+# passed to the -n option for nameing the plate.
+
+PLATENAME=$(xmllint --xpath '//*[name()="PlateName"]/text()' "$IMPORTTARGET")
+
+# run importer:
+
+omero import -u "$OMEUSER" --sudo "$SUDOUSER" -r "$SCREENID" -n "$PLATENAME" 
+
+
+done
+
+
+IFS=$SAVEIFS
+
