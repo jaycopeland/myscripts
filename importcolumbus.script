@@ -2,7 +2,7 @@
 
 # This is a script for importing a screen exported from Columbus using
 # the OMERO Command Line Import (CLI) on Orchestra. The
-# script starts by searching for MeasurementIndex*xml files under the 
+# script starts by searching for MeasurementIndex.ColumbusIDX.xml files under the 
 # screen path entered as the first argument in the command. Those
 # xml files are then fed into the omero import script as import targets. 
 # The script runs with the Import sudo option.
@@ -20,13 +20,13 @@ OMEROSERVER=$5 # OMERO Server FQDN
 
 # First find the target xml files.
 
-for IMPORTTARGET in `find ${SCREENPATH} -name "MeasurementIndex*xml"`
+for IMPORTTARGET in `find ${SCREENPATH} -name "MeasurementIndex.ColumbusIDX.xml"`
 do
 
 # The following uses xmllint to extract the PlateName out of the xml file. This is
 # passed to the -n option for nameing the plate.
 
-PLATENAME=$(xmllint --xpath '//*[name()="PlateName"]/text()' "$IMPORTTARGET")
+PLATENAME=$(echo 'cat //*[name()="PlateName"]/text()' | xmllint --shell "$IMPORTTARGET" | grep -v '^/')
 
 # first load the necessary modules
 
