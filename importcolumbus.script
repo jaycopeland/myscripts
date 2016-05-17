@@ -16,6 +16,7 @@ SCREENPATH=$1  # The directory path that contains the MeasurementIndex*xml files
 SCREENID=$2    # The ScreenID that the images should be imported into
 OMEUSER=$3     # The OME User who will own the images
 SUDOUSER=$4    # The OME Admin user that is running the scrip on behalf of OMEUSER
+OMEROSERVER=$5 # OMERO Server FQDN 
 
 # First find the target xml files.
 
@@ -34,7 +35,7 @@ module load utils/omero/5.1.4
 
 # run importer:
 
-omero import -u "$OMEUSER" --sudo "$SUDOUSER" -r "$SCREENID" -n "$PLATENAME" 
+omero import -u "$OMEUSER" -s "$OMEROSERVER" --sudo "$SUDOUSER" -r "$SCREENID" -n "$PLATENAME" 
 
 
 done
