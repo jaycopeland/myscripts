@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# This is a script for importing a screen exported from Columbus. The
+# This is a script for importing a screen exported from Columbus using
+# the OMERO Command Line Import (CLI) on Orchestra. The
 # script starts by searching for MeasurementIndex*xml files under the 
 # screen path entered as the first argument in the command. Those
 # xml files are then fed into the omero import script as import targets. 
@@ -11,10 +12,12 @@
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 
-SCREENPATH=$1
-SCREENID=$2
-OMEUSER=$3
-SUDOUSER=$4
+SCREENPATH=$1  # The directory path that contains the MeasurementIndex*xml files
+SCREENID=$2    # The ScreenID that the images should be imported into
+OMEUSER=$3     # The OME User who will own the images
+SUDOUSER=$4    # The OME Admin user that is running the scrip on behalf of OMEUSER
+
+# First find the target xml files.
 
 for IMPORTTARGET in `find ${SCREENPATH} -name "MeasurementIndex*xml"`
 do
@@ -23,6 +26,11 @@ do
 # passed to the -n option for nameing the plate.
 
 PLATENAME=$(xmllint --xpath '//*[name()="PlateName"]/text()' "$IMPORTTARGET")
+
+# first load the necessary modules
+
+module load dev/java/jdk1.8
+module load utils/omero/5.1.4
 
 # run importer:
 
